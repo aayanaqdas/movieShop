@@ -5,7 +5,7 @@ const movies = [
       year: "2022",
       info:"",
       imageUrl: "movieCovers/The_Batman.jpg",
-      id: "theBatman",
+      id: "1",
     },
 
     {
@@ -14,7 +14,7 @@ const movies = [
       year: "2022",
       info:"",
       imageUrl: "movieCovers/The_Batman.jpg",
-      id: "theBatman",
+      id: "2",
     },
     
     {
@@ -23,7 +23,7 @@ const movies = [
       year: "2022",
       info:"",
       imageUrl: "movieCovers/The_Batman.jpg",
-      id: "theBatman",
+      id: "3",
     },
 
     {
@@ -32,7 +32,7 @@ const movies = [
       year: "2022",
       info:"",
       imageUrl: "movieCovers/The_Batman.jpg",
-      id: "theBatman",
+      id: "4",
     },
 
     {
@@ -41,7 +41,7 @@ const movies = [
       year: "2022",
       info:"",
       imageUrl: "movieCovers/The_Batman.jpg",
-      id: "theBatman",
+      id: "5",
     },
 
     {
@@ -50,7 +50,7 @@ const movies = [
       year: "2022",
       info:"",
       imageUrl: "movieCovers/The_Batman.jpg",
-      id: "theBatman",
+      id: "6",
     },
 
     {
@@ -59,7 +59,7 @@ const movies = [
       year: "2022",
       info:"",
       imageUrl: "movieCovers/The_Batman.jpg",
-      id: "theBatman",
+      id: "7",
     },
 
     {
@@ -68,7 +68,7 @@ const movies = [
       year: "2022",
       info:"",
       imageUrl: "movieCovers/The_Batman.jpg",
-      id: "theBatman",
+      id: "8",
     },
 
     {
@@ -77,7 +77,7 @@ const movies = [
       year: "2022",
       info:"",
       imageUrl: "movieCovers/The_Batman.jpg",
-      id: "theBatman",
+      id: "9",
     },
 
     {
@@ -86,7 +86,7 @@ const movies = [
       year: "2022",
       info:"",
       imageUrl: "movieCovers/The_Batman.jpg",
-      id: "theBatman",
+      id: "10",
     },
 
     {
@@ -95,7 +95,7 @@ const movies = [
       year: "2022",
       info:"",
       imageUrl: "movieCovers/The_Batman.jpg",
-      id: "theBatman",
+      id: "11",
     },
 
     {
@@ -104,7 +104,7 @@ const movies = [
       year: "2022",
       info:"",
       imageUrl: "movieCovers/The_Batman.jpg",
-      id: "theBatman",
+      id: "12",
     },
 
   ];

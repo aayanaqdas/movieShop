@@ -1,12 +1,12 @@
 
-//Movies variabelen ligger i filen movies.js
+
 function generateMovieElements() {
   const movieContainer = document.getElementById("movieContainer");
-
+//Movies variabelen ligger i filen movies.js
   movies.forEach((movie) => {
     const movieElement = document.createElement("div");
     movieElement.id = movie.id;
-    movieElement.className = "column";
+    movieElement.className = "movieEl";
     movieElement.innerHTML = `
 
   
@@ -17,15 +17,15 @@ function generateMovieElements() {
                 <div class="card-content">
                     <div class="card-header">
                         <div class="left-content">
-                        <h3 style="font-weight: 600">${movie.title}</h3>
-                        <span style="color: #12efec">${movie.year}</span>
+                        <h3 class="movieTitle">${movie.title}</h3>
+                        <span class="yearText">${movie.year}</span>
                         </div>
                     <div class="right-content">
                     <button onclick="addToCart(${movie.id})" class="card-btn">Add to cart</button>
                     </div>
                 </div>
                 <div class="info">
-                    ${movie.info || "No overview yet..."}
+                   Price:  ${movie.price + " Kr"|| "No price yet..."}
                 </div>
             </div>
         </div>
