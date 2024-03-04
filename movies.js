@@ -1,3 +1,5 @@
+//Filmene som vises
+
 const movies = [
     {
       title: "The Batman",
