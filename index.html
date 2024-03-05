@@ -22,22 +22,19 @@
           <i class="fa-solid fa-cart-shopping"></i>
         </div>
       </div>
-
     </div>
 
-      <div class="searchBar">
-        <input
-          placeholder="Search Movie"
-          type="text"
-          name="text"
-          id="addInput"
-          class="input"
-        />
-      </div>
+    <div class="searchBar">
+      <form id="search-form">
+          <input type="text" class="search-input" id="search-input" placeholder="Search Movies ...">
+          <button class="search-btn" type="submit">Search</button>
+      </form>
+  </div>
+
     <div class="container">
       <div class="content">
         <h1>Movies</h1>
-        <div id="movieContainer"></div>
+         <div id="result"></div>
       </div>
     </div>
 

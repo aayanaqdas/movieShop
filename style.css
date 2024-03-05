@@ -16,12 +16,10 @@ body {
   padding: 0;
 }
 
-
 .header {
   width: 100%;
- 
 }
-.nav{
+.nav {
   display: flex;
   justify-content: space-between;
 }
@@ -31,7 +29,6 @@ body {
   font-size: 25px;
   font-weight: 600;
   margin-left: 20px;
-
 }
 
 .nav-siteName a {
@@ -39,24 +36,26 @@ body {
   color: #fff;
 }
 
-.cart-icon{
+.cart-icon {
   font-size: 30px;
   cursor: pointer;
   color: #fff;
   margin-right: 20px;
   margin-top: 20px;
-
 }
 
-.searchBar{
+.searchBar {
   width: 100%;
   display: flex;
   justify-content: center;
 }
 
-
-
-.input {
+#search-form{
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}
+.search-input {
   width: 80%;
   max-width: 500px;
   height: 30px;
@@ -68,17 +67,17 @@ body {
   color: lightgrey;
 }
 
-.input:hover {
+.search-input:hover {
   box-shadow: 0px 0px 20px -5px;
 }
 
-
-
-.input:focus {
+.search-input:focus {
   box-shadow: 0px 0px 20px -5px;
 }
 
-
+.search-btn{
+  cursor: pointer;
+}
 
 .container {
   width: 100%;
@@ -89,8 +88,7 @@ body {
   margin-top: 100px;
 }
 
-
-#movieContainer {
+#result {
   display: grid;
   grid-template-columns: repeat(6, 1fr);
   place-content: center;
@@ -205,7 +203,7 @@ body {
     grid-template-columns: repeat(5, 1fr);
   }
 
-  .searchBar{
+  .searchBar {
     margin-top: 20px;
   }
 }
@@ -224,6 +222,9 @@ body {
 @media (max-width: 500px) {
   #movieContainer {
     grid-template-columns: repeat(2, 1fr);
+  }
+  .nav-siteName a {
+    display: none;
   }
 }
 
