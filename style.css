@@ -2,6 +2,7 @@
 
 * {
   margin: 0;
+  padding: 0;
   outline: none;
   font-family: "Poppins", sans-serif;
   box-sizing: border-box;
@@ -11,7 +12,73 @@ body {
   color: #fff;
   background-color: #212121;
   padding: 1.5rem;
+  margin: 0;
+  padding: 0;
 }
+
+
+.header {
+  width: 100%;
+ 
+}
+.nav{
+  display: flex;
+  justify-content: space-between;
+}
+
+.nav-siteName {
+  text-decoration: none;
+  font-size: 25px;
+  font-weight: 600;
+  margin-left: 20px;
+
+}
+
+.nav-siteName a {
+  text-decoration: none;
+  color: #fff;
+}
+
+.cart-icon{
+  font-size: 30px;
+  cursor: pointer;
+  color: #fff;
+  margin-right: 20px;
+  margin-top: 20px;
+
+}
+
+.searchBar{
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+
+
+.input {
+  width: 80%;
+  max-width: 500px;
+  height: 30px;
+  padding: 17px;
+  border-radius: 12px;
+  border: none;
+  outline: none;
+  box-shadow: 0px 0px 20px -18px lightgrey;
+  color: lightgrey;
+}
+
+.input:hover {
+  box-shadow: 0px 0px 20px -5px;
+}
+
+
+
+.input:focus {
+  box-shadow: 0px 0px 20px -5px;
+}
+
+
 
 .container {
   width: 100%;
@@ -19,14 +86,17 @@ body {
   display: flex;
   align-items: center;
   flex-direction: column;
+  margin-top: 100px;
 }
+
 
 #movieContainer {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(6, 1fr);
   place-content: center;
   gap: 25px;
   margin-bottom: 100px;
+  margin-top: 20px;
 }
 
 .container .card {
@@ -37,8 +107,8 @@ body {
   line-height: 20px;
   width: 100%;
   height: 100%;
-  max-width: 285px;
-  max-height: 360px;
+  max-width: 150px;
+  max-height: 300px;
   overflow: hidden;
   transition: all 0.5s ease;
 }
@@ -64,29 +134,42 @@ body {
   justify-content: space-between;
 }
 
-.container .card .card-content .card-header .yearText {
-  color: #12efec;
-}
-
 .container .card .card-content .card-header .movieTitle {
   font-weight: 600;
 }
 
-.container .card .card-content .card-btn {
+.container .card .card-content .card-header .year_moreInfoBtn {
+  display: flex;
+  justify-content: space-between;
+}
+.container .card .card-content .card-header .yearText {
+  color: #12efec;
+}
+.container .card .card-content .moreInfoBtn {
+  text-decoration: none;
   color: #fff;
   cursor: pointer;
-  padding: 6px 8px;
   border: 1px solid rgba(255, 255, 255, 0.5);
   border-radius: 0.4rem;
   transition: all 0.5s ease;
   display: none;
 }
 
-.container .card .card-content .info {
+.container .card .card-content .price {
+  display: flex;
+  justify-content: space-between;
   max-height: 0;
   opacity: 0;
   border-top: 1px solid rgba(255, 255, 255, 0.3);
   overflow: hidden;
+  transition: all 0.5s ease;
+}
+
+.container .card .card-content .card-btn {
+  color: #fff;
+  cursor: pointer;
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  border-radius: 0.4rem;
   transition: all 0.5s ease;
 }
 
@@ -99,31 +182,53 @@ body {
 }
 
 .container .card:hover .card-btn {
-  display: block;
   background-color: #0091ea;
   border-color: #0091ea;
 }
 
-.container .card:hover .info {
+.container .card:hover .card-content .card-header .movieTitle {
+  margin-bottom: 10px;
+}
+
+.container .card:hover .price {
   max-height: 200px;
   opacity: 1;
   padding: 8px 0;
 }
 
-@media (max-width: 1000px){
-  #movieContainer{
-    grid-template-columns: repeat(3, 1fr);
+.container .card:hover .moreInfoBtn {
+  display: block;
+}
+
+@media (max-width: 1000px) {
+  #movieContainer {
+    grid-template-columns: repeat(5, 1fr);
+  }
+
+  .searchBar{
+    margin-top: 20px;
   }
 }
 
-@media (max-width: 800px){
-  #movieContainer{
+@media (max-width: 800px) {
+  #movieContainer {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+@media (max-width: 600px) {
+  #movieContainer {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+@media (max-width: 500px) {
+  #movieContainer {
     grid-template-columns: repeat(2, 1fr);
   }
 }
 
-@media (max-width: 500px){
-  #movieContainer{
+@media (max-width: 350px) {
+  #movieContainer {
     grid-template-columns: repeat(1, 1fr);
   }
 }

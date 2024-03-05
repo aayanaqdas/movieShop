@@ -18,34 +18,31 @@ function generateMovieElements() {
                     <div class="card-header">
                         <div class="left-content">
                         <h3 class="movieTitle">${movie.title}</h3>
-                        <span class="yearText">${movie.year}</span>
+                        <div class="year_moreInfoBtn"> 
+                          <span class="yearText">${movie.year}</span>
+                          <a href="" class="moreInfoBtn">More Info</a>
+                        </div>
+                        
+                
                         </div>
                     <div class="right-content">
-                    <button onclick="addToCart(${movie.id})" class="card-btn">Add to cart</button>
+                    
                     </div>
                 </div>
-                <div class="info">
-                   Price:  ${movie.price + " Kr"|| "No price yet..."}
+                <div class="price">
+                   Price:  ${movie.price + " Kr"}
+                   <button onclick="addToCart(${movie.id})" class="card-btn">Buy</button>
                 </div>
             </div>
         </div>
 
  `;
-/*
-      <div class="movie-card">
-       <img src="${movie.imageUrl}" alt="${movie.title}">
-       <h2>${movie.title}</h2>
-       <p>${movie.info}</p>
-       <p>Price: ${movie.price} Kr</p>
-       <button onclick="addToCart(${movie.id})">Add to Cart</button>
-       </div>
-       */
-
     movieContainer.appendChild(movieElement);
   });
 }
 
 function addToCart(movieId) {
+  
   console.log(movieId);
 }
 
