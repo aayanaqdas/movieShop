@@ -50,7 +50,7 @@ body {
   justify-content: center;
 }
 
-#search-form{
+#search-form {
   display: flex;
   justify-content: center;
   width: 100%;
@@ -75,7 +75,7 @@ body {
   box-shadow: 0px 0px 20px -5px;
 }
 
-.search-btn{
+.search-btn {
   cursor: pointer;
 }
 
@@ -150,7 +150,9 @@ body {
   border: 1px solid rgba(255, 255, 255, 0.5);
   border-radius: 0.4rem;
   transition: all 0.5s ease;
+  margin-left: 28px;
   display: none;
+  
 }
 
 .container .card .card-content .price {
@@ -163,7 +165,9 @@ body {
   transition: all 0.5s ease;
 }
 
-.container .card .card-content .card-btn {
+.container .card .card-content .buy-btn {
+  padding-left: 7px;
+  padding-right: 7px;
   color: #fff;
   cursor: pointer;
   border: 1px solid rgba(255, 255, 255, 0.5);
@@ -179,7 +183,7 @@ body {
   background-image: linear-gradient(180deg, rgba(51, 55, 69, 0), #101528 48%);
 }
 
-.container .card:hover .card-btn {
+.container .card:hover .buy-btn {
   background-color: #0091ea;
   border-color: #0091ea;
 }
@@ -196,10 +200,11 @@ body {
 
 .container .card:hover .moreInfoBtn {
   display: block;
+  
 }
 
 @media (max-width: 1000px) {
-  #movieContainer {
+  #result {
     grid-template-columns: repeat(5, 1fr);
   }
 
@@ -209,27 +214,24 @@ body {
 }
 
 @media (max-width: 800px) {
-  #movieContainer {
+  #result {
     grid-template-columns: repeat(4, 1fr);
   }
 }
 
 @media (max-width: 600px) {
-  #movieContainer {
+  #result {
     grid-template-columns: repeat(3, 1fr);
   }
 }
 @media (max-width: 500px) {
-  #movieContainer {
+  #result {
     grid-template-columns: repeat(2, 1fr);
-  }
-  .nav-siteName a {
-    display: none;
   }
 }
 
 @media (max-width: 350px) {
-  #movieContainer {
+  #result {
     grid-template-columns: repeat(1, 1fr);
   }
 }

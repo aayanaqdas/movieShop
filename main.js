@@ -35,11 +35,41 @@ function createMovieCard(movie) {
   const { poster_path, original_title, release_date, overview } = movie;
   const imagePath = poster_path ? imgApi + poster_path : "./img-01.jpeg";
   const truncatedTitle = original_title.length > 15 ? original_title.slice(0, 15) + "..." : original_title;
-  const formattedDate = release_date || "No release date";
+  const formattedDate = release_date.length > 4 ? release_date.slice(0, 4) : release_date|| "No release date";
+  const price = formattedDate[3] >= 3 ?  "100" : formattedDate || formattedDate[3] < 3 ?  "50" : formattedDate;
   const cardTemplate = `
-      <div class="column">
-          <div class="card">
-              <a class="card-media" href="./img-01.jpeg">
+
+  <div class="card">
+
+  <a class="card-media" href="">
+  <img src="${imagePath}" alt="${original_title}" width="100%" />
+  </a>
+  <div class="card-content">
+      <div class="card-header">
+          <div class="left-content">
+          <h3 class="movieTitle">${truncatedTitle}</h3>
+          <div class="year_moreInfoBtn"> 
+            <span class="yearText">${formattedDate}</span>
+            <a href="" class="moreInfoBtn">More Info</a>
+          </div>
+          
+  
+          </div>
+      <div class="right-content">
+      
+      </div>
+  </div>
+  <div class="price">
+     Price:  ${price + " Kr"}
+     <button onclick="addToCart(${movie.id})" class="buy-btn">Buy</button>
+  </div>
+</div>
+</div>
+      
+  `;
+
+  /*          <div class="card">
+              <a class="card-media" href="">
                   <img src="${imagePath}" alt="${original_title}" width="100%" />
               </a>
               <div class="card-content">
@@ -57,8 +87,7 @@ function createMovieCard(movie) {
               </div>
           </div>
       </div>
-  </div>
-  `;
+  */ 
   return cardTemplate;
 }
 
