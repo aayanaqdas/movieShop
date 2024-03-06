@@ -40,7 +40,6 @@ function createMovieCard(movie) {
   const cardTemplate = `
 
   <div class="card">
-
   <a class="card-media" href="">
   <img src="${imagePath}" alt="${original_title}" width="100%" />
   </a>
@@ -148,6 +147,22 @@ async function init() {
 }
 
 init();
+
+//Displaying cart icons and cart
+const cartIcon = document.getElementById("cart-icon");
+const closeIcon = document.getElementById("close-icon");
+const cart = document.getElementById("shopping-cart");
+function openCart(){
+  cart.style.display = "block"
+  closeIcon.style.display = "block";
+  cartIcon.style.display = "none"
+}
+function closeCart(){
+  cart.style.display = "none"
+  closeIcon.style.display = "none";
+  cartIcon.style.display = "block"
+}
+
 /*
 function generateMovieElements() {
   const movieContainer = document.getElementById("movieContainer");

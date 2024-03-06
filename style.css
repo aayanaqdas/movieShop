@@ -16,6 +16,12 @@ body {
   padding: 0;
 }
 
+.container{
+  width: 100%;
+  height: 100%;
+
+}
+
 .header {
   width: 100%;
 }
@@ -36,13 +42,57 @@ body {
   color: #fff;
 }
 
-.cart-icon {
+.shopping-cart-container{
+  width: 100%;
+}
+
+#cart-icon {
   font-size: 30px;
   cursor: pointer;
   color: #fff;
   margin-right: 20px;
   margin-top: 20px;
+  float: right;
 }
+#close-icon{
+  display: none;
+  font-size: 30px;
+  cursor: pointer;
+  color: black;
+  margin-right: 20px;
+  margin-top: 20px;
+  float: right;
+}
+
+#shopping-cart{
+  display: none;
+  background-color: white;
+  width: 100%;
+  height: 100vh;
+  max-width: 500px;
+  float: right;
+}
+
+.cart-title{
+  color: black;
+  font-size: 25px;
+  font-weight: 600;
+  margin-top: 50px;
+}
+
+/*
+#cart{
+  display: none;
+  background-color: white;
+  width: 100%;
+  height: 100vh;
+  max-width: 1000px;
+  float: right;
+}
+*/
+
+
+
 
 .searchBar {
   width: 100%;
@@ -64,7 +114,7 @@ body {
   border: none;
   outline: none;
   box-shadow: 0px 0px 20px -18px lightgrey;
-  color: lightgrey;
+  color: black;
 }
 
 .search-input:hover {
@@ -79,14 +129,18 @@ body {
   cursor: pointer;
 }
 
-.container {
+.content-container {
   width: 100%;
   max-height: 100vh;
   display: flex;
   align-items: center;
   flex-direction: column;
   margin-top: 100px;
+  
 }
+
+
+
 
 #result {
   display: grid;
@@ -97,7 +151,7 @@ body {
   margin-top: 20px;
 }
 
-.container .card {
+.content-container .card {
   position: relative;
   font-size: 14px;
   border: 1px solid rgba(255, 255, 255, 0.6);
@@ -111,7 +165,7 @@ body {
   transition: all 0.5s ease;
 }
 
-.container .card .card-content {
+.content-container .card .card-content {
   width: 100%;
   position: absolute;
   bottom: 0;
@@ -125,25 +179,25 @@ body {
   transition: all 0.5s ease;
 }
 
-.container .card .card-content .card-header {
+.content-container .card .card-content .card-header {
   padding: 8px 0;
   display: flex;
   align-items: center;
   justify-content: space-between;
 }
 
-.container .card .card-content .card-header .movieTitle {
+.content-container .card .card-content .card-header .movieTitle {
   font-weight: 600;
 }
 
-.container .card .card-content .card-header .year_moreInfoBtn {
+.content-container .card .card-content .card-header .year_moreInfoBtn {
   display: flex;
   justify-content: space-between;
 }
-.container .card .card-content .card-header .yearText {
+.content-container .card .card-content .card-header .yearText {
   color: #12efec;
 }
-.container .card .card-content .moreInfoBtn {
+.content-container .card .card-content .moreInfoBtn {
   text-decoration: none;
   color: #fff;
   cursor: pointer;
@@ -155,7 +209,7 @@ body {
   
 }
 
-.container .card .card-content .price {
+.content-container .card .card-content .price {
   display: flex;
   justify-content: space-between;
   max-height: 0;
@@ -165,7 +219,7 @@ body {
   transition: all 0.5s ease;
 }
 
-.container .card .card-content .buy-btn {
+.content-container .card .card-content .buy-btn {
   padding-left: 7px;
   padding-right: 7px;
   color: #fff;
@@ -175,30 +229,30 @@ body {
   transition: all 0.5s ease;
 }
 
-.container .card:hover {
+.content-container .card:hover {
   cursor: pointer;
 }
 
-.container .card:hover .card-content {
+.content-container .card:hover .card-content {
   background-image: linear-gradient(180deg, rgba(51, 55, 69, 0), #101528 48%);
 }
 
-.container .card:hover .buy-btn {
+.content-container .card:hover .buy-btn {
   background-color: #0091ea;
   border-color: #0091ea;
 }
 
-.container .card:hover .card-content .card-header .movieTitle {
+.content-container .card:hover .card-content .card-header .movieTitle {
   margin-bottom: 10px;
 }
 
-.container .card:hover .price {
+.content-container .card:hover .price {
   max-height: 200px;
   opacity: 1;
   padding: 8px 0;
 }
 
-.container .card:hover .moreInfoBtn {
+.content-container .card:hover .moreInfoBtn {
   display: block;
   
 }
@@ -233,5 +287,8 @@ body {
 @media (max-width: 350px) {
   #result {
     grid-template-columns: repeat(1, 1fr);
+  }
+  .nav-siteName a{
+    display: none;
   }
 }
