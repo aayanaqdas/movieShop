@@ -16,10 +16,9 @@ body {
   padding: 0;
 }
 
-.container{
+.container {
   width: 100%;
-  height: 100%;
-
+  height: 100vh;
 }
 
 .header {
@@ -42,10 +41,6 @@ body {
   color: #fff;
 }
 
-.shopping-cart-container{
-  width: 100%;
-}
-
 #cart-icon {
   font-size: 30px;
   cursor: pointer;
@@ -54,45 +49,172 @@ body {
   margin-top: 20px;
   float: right;
 }
-#close-icon{
+
+.shopping-cart-container {
+  width: 100%;
+  z-index: 99 !important;
+  position: absolute;
+  overflow: auto;
+  background-color: rgb(0, 0, 0);
+  background-color: rgba(0, 0, 0, 0.6);
+  position: fixed;
+}
+
+#shopping-cart {
+  display: none;
+  background-color: white;
+  color: black;
+  width: 100%;
+  max-width: 500px;
+  height: 100vh;
+  overflow: auto;
+  float: right;
+}
+
+.cart-top-section {
+  display: flex;
+  justify-content: center;
+  justify-content: space-between;
+  padding: 10px 30px 10px 30px;
+}
+#close-icon {
   display: none;
   font-size: 30px;
   cursor: pointer;
   color: black;
-  margin-right: 20px;
-  margin-top: 20px;
   float: right;
 }
 
-#shopping-cart{
-  display: none;
-  background-color: white;
-  width: 100%;
-  height: 100vh;
-  max-width: 500px;
-  float: right;
-}
-
-.cart-title{
+.cart-title {
   color: black;
   font-size: 25px;
   font-weight: 600;
-  margin-top: 50px;
 }
-
-/*
-#cart{
-  display: none;
+.shopping-cart-content {
   background-color: white;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   width: 100%;
   height: 100vh;
-  max-width: 1000px;
-  float: right;
+  max-width: 440px;
+  margin: 0 auto;
 }
-*/
 
+.cart-items {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  gap: 20px;
+  margin-top: 30px;
+}
 
+.item {
+  box-sizing: border-box;
+  width: 100%;
+  height: 100%;
+  max-height: 173px;
+  padding: 10px;
+  background: transparent;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15), 0 1px 2px rgba(0, 0, 0, 0.3);
+  overflow: hidden;
+}
 
+.item-content {
+  width: 100%;
+  color: black;
+}
+
+.item-img-text-wrapper {
+  display: flex;
+  gap: 20px;
+}
+
+.item-img {
+  width: 100%;
+  height: 100%;
+  max-width: 100px;
+  max-height: 300px;
+  display: flex;
+  align-items: center;
+}
+
+.item-text-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.title-removeBtn {
+  display: flex;
+  justify-content: space-between;
+}
+
+#remove-item-btn {
+  font-size: 20px;
+  cursor: pointer;
+  color: black;
+  margin-right: 10px;
+}
+.item-description {
+  font-size: 12px;
+}
+
+.item-price {
+  text-align: right;
+  font-size: 20px;
+  font-weight: 600;
+  margin-right: 20px;
+  margin-top: 5px;
+}
+
+hr {
+  background-color: black;
+  margin-top: 40px;
+  width: 100%;
+  height: 3px;
+}
+
+.cart-bottom-section {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.cart-total {
+  display: flex;
+  justify-content: space-between;
+  padding: 8px;
+}
+
+.cart-total-title {
+  text-align: left;
+  font-size: 25px;
+  font-weight: 600;
+  margin-left: 20px;
+  margin-top: 5px;
+}
+
+.cart-total-price {
+  text-align: right;
+  font-size: 25px;
+  font-weight: 600;
+  margin-right: 20px;
+  margin-top: 5px;
+}
+
+#checkoutbtn {
+  background-color: #6aa334;
+  color: #fff;
+  border: none;
+  border-radius: 50px;
+  padding: 10px;
+  margin-top: 30px;
+  margin-bottom: 100px;
+  font-size: 15px;
+  cursor: pointer;
+}
 
 .searchBar {
   width: 100%;
@@ -136,11 +258,8 @@ body {
   align-items: center;
   flex-direction: column;
   margin-top: 100px;
-  
+  position: relative;
 }
-
-
-
 
 #result {
   display: grid;
@@ -206,7 +325,6 @@ body {
   transition: all 0.5s ease;
   margin-left: 28px;
   display: none;
-  
 }
 
 .content-container .card .card-content .price {
@@ -254,7 +372,6 @@ body {
 
 .content-container .card:hover .moreInfoBtn {
   display: block;
-  
 }
 
 @media (max-width: 1000px) {
@@ -270,6 +387,14 @@ body {
 @media (max-width: 800px) {
   #result {
     grid-template-columns: repeat(4, 1fr);
+  }
+  #shopping-cart {
+    max-width: 100%;
+  }
+
+  .shopping-cart-content {
+    max-width: 100%;
+    max-width: 600px;
   }
 }
 
@@ -288,7 +413,7 @@ body {
   #result {
     grid-template-columns: repeat(1, 1fr);
   }
-  .nav-siteName a{
+  .nav-siteName a {
     display: none;
   }
 }

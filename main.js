@@ -36,7 +36,8 @@ function createMovieCard(movie) {
   const imagePath = poster_path ? imgApi + poster_path : "./img-01.jpeg";
   const truncatedTitle = original_title.length > 15 ? original_title.slice(0, 15) + "..." : original_title;
   const formattedDate = release_date.length > 4 ? release_date.slice(0, 4) : release_date|| "No release date";
-  const price = formattedDate[3] >= 3 ?  "100" : formattedDate || formattedDate[3] < 3 ?  "50" : formattedDate;
+  const year = formattedDate.slice(0, 4);
+  const price = year >= 2023 ? '100' : year > 2000 ? '50' : '25';
   const cardTemplate = `
 
   <div class="card">
@@ -156,12 +157,18 @@ function openCart(){
   cart.style.display = "block"
   closeIcon.style.display = "block";
   cartIcon.style.display = "none"
+  document.body.style.overflow = "hidden";
 }
 function closeCart(){
   cart.style.display = "none"
   closeIcon.style.display = "none";
   cartIcon.style.display = "block"
+  document.body.style.overflow = "visible";
 }
+
+
+
+
 
 /*
 function generateMovieElements() {
