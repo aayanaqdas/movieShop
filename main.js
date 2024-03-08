@@ -8,17 +8,16 @@ const result = document.getElementById("result");
 let page = 1;
 let isSearching = false;
 
-
 // Fetch JSON data from url
 async function fetchData(url) {
   try {
-      const response = await fetch(url);
-      if (!response.ok) {
-          throw new Error("Network response was not ok.");
-      }
-      return await response.json();
+    const response = await fetch(url);
+    if (!response.ok) {
+      throw new Error("Network response was not ok.");
+    }
+    return await response.json();
   } catch (error) {
-      return null;
+    return null;
   }
 }
 
@@ -26,7 +25,7 @@ async function fetchData(url) {
 async function fetchAndShowResult(url) {
   const data = await fetchData(url);
   if (data && data.results) {
-      showResults(data.results);
+    showResults(data.results);
   }
 }
 
@@ -34,10 +33,17 @@ async function fetchAndShowResult(url) {
 function createMovieCard(movie) {
   const { poster_path, original_title, release_date, overview } = movie;
   const imagePath = poster_path ? imgApi + poster_path : "./img-01.jpeg";
-  const truncatedTitle = original_title.length > 15 ? original_title.slice(0, 15) + "..." : original_title;
-  const formattedDate = release_date.length > 4 ? release_date.slice(0, 4) : release_date|| "No release date";
+  const truncatedTitle =
+    original_title.length > 15
+      ? original_title.slice(0, 15) + "..."
+      : original_title;
+  const formattedDate =
+    release_date.length > 4
+      ? release_date.slice(0, 4)
+      : release_date || "No release date";
   const year = formattedDate.slice(0, 4);
-  const price = year >= 2023 ? '100' : year > 2000 ? '50' : '25';
+  const price = year >= 2023 ? "100" : year > 2000 ? "50" : "25";
+
   const cardTemplate = `
 
   <div class="card">
@@ -61,33 +67,12 @@ function createMovieCard(movie) {
   </div>
   <div class="price">
      Price:  ${price + " Kr"}
-     <button onclick="addToCart(${movie.id})" class="buy-btn">Buy</button>
+     <button onclick="createCartItem('${imagePath}', '${original_title}', '${overview}', '${price}')" id="buy-btn">Buy</button>
   </div>
 </div>
 </div>
       
   `;
-
-  /*          <div class="card">
-              <a class="card-media" href="">
-                  <img src="${imagePath}" alt="${original_title}" width="100%" />
-              </a>
-              <div class="card-content">
-                  <div class="card-header">
-                      <div class="left-content">
-                      <h3 style="font-weight: 600">${truncatedTitle}</h3>
-                      <span style="color: #12efec">${formattedDate}</span>
-                      </div>
-                  <div class="right-content">
-                      <a href="${imagePath}" target="_blank" class="card-btn">See Cover</a>
-                  </div>
-              </div>
-              <div class="info">
-                  ${overview || "No overview yet..."}
-              </div>
-          </div>
-      </div>
-  */ 
   return cardTemplate;
 }
 
@@ -105,11 +90,13 @@ function showResults(item) {
 // Load more results
 async function loadMoreResults() {
   if (isSearching) {
-      return;
+    return;
   }
   page++;
   const searchTerm = query.value;
-  const url = searchTerm ? `${searchUrl}${searchTerm}&page=${page}` : `https://api.themoviedb.org/3/discover/movie?sort_by=popularity.desc&api_key=${apiKey}&page=${page}`;
+  const url = searchTerm
+    ? `${searchUrl}${searchTerm}&page=${page}`
+    : `https://api.themoviedb.org/3/discover/movie?sort_by=popularity.desc&api_key=${apiKey}&page=${page}`;
   await fetchAndShowResult(url);
 }
 
@@ -117,7 +104,7 @@ async function loadMoreResults() {
 function detectEnd() {
   const { scrollTop, clientHeight, scrollHeight } = document.documentElement;
   if (scrollTop + clientHeight >= scrollHeight - 20) {
-      loadMoreResults();
+    loadMoreResults();
   }
 }
 
@@ -126,18 +113,18 @@ async function handleSearch(e) {
   e.preventDefault();
   const searchTerm = query.value.trim();
   if (searchTerm) {
-      isSearching = true;
-      clearResults();
-      const newUrl = `${searchUrl}${searchTerm}&page=${page}`;
-      await fetchAndShowResult(newUrl);
-      query.value = "";
+    isSearching = true;
+    clearResults();
+    const newUrl = `${searchUrl}${searchTerm}&page=${page}`;
+    await fetchAndShowResult(newUrl);
+    query.value = "";
   }
 }
 
 // Event listeners
-form.addEventListener('submit', handleSearch);
-window.addEventListener('scroll', detectEnd);
-window.addEventListener('resize', detectEnd);
+form.addEventListener("submit", handleSearch);
+window.addEventListener("scroll", detectEnd);
+window.addEventListener("resize", detectEnd);
 
 // Initialize the page
 async function init() {
@@ -149,74 +136,64 @@ async function init() {
 
 init();
 
-//Displaying cart icons and cart
+//Cart components
 const cartIcon = document.getElementById("cart-icon");
 const closeIcon = document.getElementById("close-icon");
-const cart = document.getElementById("shopping-cart");
-function openCart(){
-  cart.style.display = "block"
+const cartContainer = document.getElementById("shopping-cart");
+const cartItems = document.getElementById("cart-items");
+const removeItemBtn = document.getElementById("remove-cart-item");
+
+function openCart() {
+  cartContainer.style.display = "block";
   closeIcon.style.display = "block";
-  cartIcon.style.display = "none"
+  cartIcon.style.display = "none";
   document.body.style.overflow = "hidden";
 }
-function closeCart(){
-  cart.style.display = "none"
+function closeCart() {
+  cartContainer.style.display = "none";
   closeIcon.style.display = "none";
-  cartIcon.style.display = "block"
+  cartIcon.style.display = "block";
   document.body.style.overflow = "visible";
 }
 
-
-
-
-
-/*
-function generateMovieElements() {
-  const movieContainer = document.getElementById("movieContainer");
-//Movies variabelen ligger i filen movies.js
-  movies.forEach((movie) => {
-    const movieElement = document.createElement("div");
-    movieElement.id = movie.id;
-    movieElement.className = "movieEl";
-    movieElement.innerHTML = `
-
-  
-            <div class="card">
-                <a class="card-media" href="">
-                    <img src="${movie.imageUrl}" alt="${movie.title}" width="100%" />
-                </a>
-                <div class="card-content">
-                    <div class="card-header">
-                        <div class="left-content">
-                        <h3 class="movieTitle">${movie.title}</h3>
-                        <div class="year_moreInfoBtn"> 
-                          <span class="yearText">${movie.year}</span>
-                          <a href="" class="moreInfoBtn">More Info</a>
-                        </div>
-                        
-                
-                        </div>
-                    <div class="right-content">
-                    
-                    </div>
-                </div>
-                <div class="price">
-                   Price:  ${movie.price + " Kr"}
-                   <button onclick="addToCart(${movie.id})" class="card-btn">Buy</button>
-                </div>
-            </div>
+function createCartItem(image, title, description, price) {
+  const cartItemTemplate = `
+  <div class="item">
+  <div class="item-content">
+    <div class="item-img-text-wrapper">
+      <img
+        class="item-img"
+        src="${image}"
+        alt="${title}"
+      />
+      <div class="item-text-wrapper">
+        <div class="title-removeBtn">
+          <h4>${title}</h4>
+          <i
+            id="remove-item-btn"
+            class="fa-solid fa-minus"
+          ></i>
         </div>
 
- `;
-    movieContainer.appendChild(movieElement);
-  });
+        <p class="item-description">${description}</p>
+        <div class="item-price">${price},-</div>
+      </div>
+    </div>
+  </div>
+</div>
+  `;
+
+  localStorage.setItem("cart-item", cartItemTemplate);
+  addToCart();
 }
 
-function addToCart(movieId) {
-  
-  console.log(movieId);
+function addToCart() {
+  item = localStorage.getItem("cart-item");
+  cartItems.innerHTML += item;
 }
 
-generateMovieElements();
-
-*/
+function removeFromCart() {
+  item = localStorage.getItem("cart-item");
+  localStorage.removeItem("cart-item");
+  cartItems.innerHTML += item;
+}

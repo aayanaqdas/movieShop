@@ -58,6 +58,7 @@ body {
   background-color: rgb(0, 0, 0);
   background-color: rgba(0, 0, 0, 0.6);
   position: fixed;
+
 }
 
 #shopping-cart {
@@ -69,6 +70,8 @@ body {
   height: 100vh;
   overflow: auto;
   float: right;
+
+
 }
 
 .cart-top-section {
@@ -77,6 +80,7 @@ body {
   justify-content: space-between;
   padding: 10px 30px 10px 30px;
 }
+
 #close-icon {
   display: none;
   font-size: 30px;
@@ -101,7 +105,7 @@ body {
   margin: 0 auto;
 }
 
-.cart-items {
+#cart-items {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -214,6 +218,10 @@ hr {
   margin-bottom: 100px;
   font-size: 15px;
   cursor: pointer;
+}
+
+#checkoutbtn:hover{
+  opacity: 0.7;
 }
 
 .searchBar {
@@ -337,7 +345,7 @@ hr {
   transition: all 0.5s ease;
 }
 
-.content-container .card .card-content .buy-btn {
+.content-container .card .card-content #buy-btn {
   padding-left: 7px;
   padding-right: 7px;
   color: #fff;
@@ -355,7 +363,7 @@ hr {
   background-image: linear-gradient(180deg, rgba(51, 55, 69, 0), #101528 48%);
 }
 
-.content-container .card:hover .buy-btn {
+.content-container .card:hover #buy-btn {
   background-color: #0091ea;
   border-color: #0091ea;
 }
@@ -406,6 +414,24 @@ hr {
 @media (max-width: 500px) {
   #result {
     grid-template-columns: repeat(2, 1fr);
+  }
+
+  .shopping-cart-content {
+    width: 100%;
+    height: 100vh;
+    max-width: 350px;
+  }
+
+  .item-description {
+    font-size: 12px;
+  }
+  
+  .item-price {
+    text-align: right;
+    font-size: 20px;
+    font-weight: 600;
+    margin-right: 20px;
+    margin-top: -15px;
   }
 }
 

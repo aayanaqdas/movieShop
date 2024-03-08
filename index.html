@@ -4,13 +4,11 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <link rel="stylesheet" href="style.css" />
-
     <script
       src="https://kit.fontawesome.com/c385798621.js"
       crossorigin="anonymous"
     ></script>
-
+    <link rel="stylesheet" href="style.css" />
     <title>MovieShop</title>
   </head>
   <body>
@@ -36,36 +34,7 @@
                 </span>
               </div>
               <div class="shopping-cart-content">
-                <div class="cart-items">
-                  <div class="item">
-                    <div class="item-content">
-                      <div class="item-img-text-wrapper">
-                        <img
-                          class="item-img"
-                          src="./movieCovers/The_Batman.jpg"
-                          alt=""
-                        />
-                        <div class="item-text-wrapper">
-                          <div class="title-removeBtn">
-                            <h4>Movie Title</h4>
-                            <i
-                              id="remove-item-btn"
-                              class="fa-solid fa-minus"
-                            ></i>
-                          </div>
-
-                          <p class="item-description">
-                            Lorem Ipsum is simply dummy text of the printing and
-                            typesetting industry. Lorem Ipsum has been the
-                            industry's standard dummy text ever since the 1500s,
-                            when an unknown printer took
-                          </p>
-                          <div class="item-price">100,-</div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
+                <div id="cart-items"></div>
 
                 <hr />
                 <div class="cart-bottom-section">
@@ -74,7 +43,7 @@
                       <h4>Total NOK:</h4>
                     </div>
                     <div class="cart-total-price">
-                      <h4>100,-</h4>
+                      <h4></h4>
                     </div>
                   </div>
                   <button id="checkoutbtn">Check out</button>
