@@ -58,7 +58,6 @@ body {
   background-color: rgb(0, 0, 0);
   background-color: rgba(0, 0, 0, 0.6);
   position: fixed;
-
 }
 
 #shopping-cart {
@@ -70,8 +69,6 @@ body {
   height: 100vh;
   overflow: auto;
   float: right;
-
-
 }
 
 .cart-top-section {
@@ -220,7 +217,7 @@ hr {
   cursor: pointer;
 }
 
-#checkoutbtn:hover{
+#checkoutbtn:hover {
   opacity: 0.7;
 }
 
@@ -425,7 +422,7 @@ hr {
   .item-description {
     font-size: 12px;
   }
-  
+
   .item-price {
     text-align: right;
     font-size: 20px;

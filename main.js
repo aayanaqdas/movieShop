@@ -43,14 +43,16 @@ function createMovieCard(movie) {
       : release_date || "No release date";
   const year = formattedDate.slice(0, 4);
   const price = year >= 2023 ? "100" : year > 2000 ? "50" : "25";
-
+  const escapedOverview = overview.replace(/['"]/g, "&apos;")
   const cardTemplate = `
 
   <div class="card">
-  <a class="card-media" href="">
+  <a class="card-media" href="index.html">
   <img src="${imagePath}" alt="${original_title}" width="100%" />
   </a>
+  
   <div class="card-content">
+       
       <div class="card-header">
           <div class="left-content">
           <h3 class="movieTitle">${truncatedTitle}</h3>
@@ -67,7 +69,10 @@ function createMovieCard(movie) {
   </div>
   <div class="price">
      Price:  ${price + " Kr"}
-     <button onclick="createCartItem('${imagePath}', '${original_title}', '${overview}', '${price}')" id="buy-btn">Buy</button>
+     
+     <button id="buy-btn" onclick="createCartItem(\`${imagePath}\`, \`${original_title}\`, \`${escapedOverview}\`, \`${price}\`)">Buy</button>
+     
+   
   </div>
 </div>
 </div>
@@ -183,17 +188,11 @@ function createCartItem(image, title, description, price) {
 </div>
   `;
 
-  localStorage.setItem("cart-item", cartItemTemplate);
-  addToCart();
+  addToCart(cartItemTemplate);
+ 
 }
 
-function addToCart() {
-  item = localStorage.getItem("cart-item");
+function addToCart(item) {
   cartItems.innerHTML += item;
-}
 
-function removeFromCart() {
-  item = localStorage.getItem("cart-item");
-  localStorage.removeItem("cart-item");
-  cartItems.innerHTML += item;
 }
