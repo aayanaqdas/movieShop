@@ -31,7 +31,7 @@ async function fetchAndShowResult(url) {
 
 // Create movie card html template
 function createMovieCard(movie) {
-  const { poster_path, original_title, release_date, overview } = movie;
+  const { poster_path, original_title, release_date, overview, id } = movie;
   const imagePath = poster_path ? imgApi + poster_path : "./img-01.jpeg";
   const truncatedTitle =
     original_title.length > 15
@@ -43,10 +43,10 @@ function createMovieCard(movie) {
       : release_date || "No release date";
   const year = formattedDate.slice(0, 4);
   const price = year >= 2023 ? "100" : year > 2000 ? "50" : "25";
-  const escapedOverview = overview.replace(/['"]/g, "&apos;")
+  const escapedOverview = overview.replace(/['"]/g, "&apos;");
   const cardTemplate = `
 
-  <div class="card">
+  <div class="card" data-id=${id}>
   <a class="card-media" href="index.html">
   <img src="${imagePath}" alt="${original_title}" width="100%" />
   </a>
@@ -70,7 +70,7 @@ function createMovieCard(movie) {
   <div class="price">
      Price:  ${price + " Kr"}
      
-     <button id="buy-btn" onclick="createCartItem(\`${imagePath}\`, \`${original_title}\`, \`${escapedOverview}\`, \`${price}\`)">Buy</button>
+     <button id="buy-btn" onclick="createCartItem(\`${imagePath}\`, \`${original_title}\`, \`${escapedOverview}\`, \`${price}\`, \`${id}\`)">Buy</button>
      
    
   </div>
@@ -78,6 +78,7 @@ function createMovieCard(movie) {
 </div>
       
   `;
+
   return cardTemplate;
 }
 
@@ -141,29 +142,31 @@ async function init() {
 
 init();
 
-//Cart components
-const cartIcon = document.getElementById("cart-icon");
-const closeIcon = document.getElementById("close-icon");
-const cartContainer = document.getElementById("shopping-cart");
-const cartItems = document.getElementById("cart-items");
-const removeItemBtn = document.getElementById("remove-cart-item");
+
+//Cart functions
+const cartIconEl = document.getElementById("cart-icon");
+const closeIconEl = document.getElementById("close-icon");
+const cartContainerEl = document.getElementById("shopping-cart");
+const cartItemsEl = document.getElementById("cart-items");
+
 
 function openCart() {
-  cartContainer.style.display = "block";
-  closeIcon.style.display = "block";
-  cartIcon.style.display = "none";
+  cartContainerEl.style.display = "block";
+  closeIconEl.style.display = "block";
+  cartIconEl.style.display = "none";
   document.body.style.overflow = "hidden";
 }
 function closeCart() {
-  cartContainer.style.display = "none";
-  closeIcon.style.display = "none";
-  cartIcon.style.display = "block";
+  cartContainerEl.style.display = "none";
+  closeIconEl.style.display = "none";
+  cartIconEl.style.display = "block";
   document.body.style.overflow = "visible";
+
 }
 
-function createCartItem(image, title, description, price) {
+function createCartItem(image, title, description, price, id) {
   const cartItemTemplate = `
-  <div class="item">
+  <div class="item" data-id= "${id}">
   <div class="item-content">
     <div class="item-img-text-wrapper">
       <img
@@ -174,10 +177,7 @@ function createCartItem(image, title, description, price) {
       <div class="item-text-wrapper">
         <div class="title-removeBtn">
           <h4>${title}</h4>
-          <i
-            id="remove-item-btn"
-            class="fa-solid fa-minus"
-          ></i>
+          <i id="remove-item-btn" class="fa-solid fa-minus" onclick="removeCartItem('${id}')"></i>
         </div>
 
         <p class="item-description">${description}</p>
@@ -187,12 +187,32 @@ function createCartItem(image, title, description, price) {
   </div>
 </div>
   `;
-
+console.log(id);
   addToCart(cartItemTemplate);
- 
+
+}
+function addToCart(item) {
+    cartItemsEl.innerHTML += item;
+  /*
+  cartItemsArray.push(item);
+  const cartItems = cartItemsArray.join("");
+
+  console.log(cartItemsArray);
+*/
+}
+function getCartItems() {
+  const cartItems = Array.from(document.querySelectorAll('.item'));
+  return cartItems;
 }
 
-function addToCart(item) {
-  cartItems.innerHTML += item;
+function removeCartItem(itemId) {
+  const updatedCartItems = getCartItems().filter((item) => String(item.dataset.id) !== String(itemId));
+  renderCartItems(updatedCartItems);
+}
 
+function renderCartItems(cartItems) {
+  cartItemsEl.innerHTML = '';
+  cartItems.forEach((item) => {
+    cartItemsEl.innerHTML += item.outerHTML;
+  });
 }
