@@ -43,7 +43,9 @@ function createMovieCard(movie) {
       : release_date || "No release date";
   const year = formattedDate.slice(0, 4);
   const price = year >= 2023 ? "100" : year > 2000 ? "50" : "25";
-  const escapedOverview = overview.replace(/['"]/g, "&apos;");
+   const escapedOverview = overview.replace(/['"]/g, "&apos;");
+  const description = escapedOverview.length > 136 ? escapedOverview.slice(0, 136) + "..." : escapedOverview;
+ 
   const cardTemplate = `
 
   <div class="card" data-id=${id}>
@@ -70,7 +72,7 @@ function createMovieCard(movie) {
   <div class="price">
      Price:  ${price + " Kr"}
      
-     <button id="buy-btn" onclick="createCartItem(\`${imagePath}\`, \`${original_title}\`, \`${escapedOverview}\`, \`${price}\`, \`${id}\`)">Buy</button>
+     <button id="buy-btn" onclick="createCartItem(\`${imagePath}\`, \`${original_title}\`, \`${description}\`, \`${price}\`, \`${id}\`)">Buy</button>
      
    
   </div>
@@ -146,23 +148,23 @@ init();
 //Cart functions
 const cartIconEl = document.getElementById("cart-icon");
 const closeIconEl = document.getElementById("close-icon");
-const cartContainerEl = document.getElementById("shopping-cart");
+const cartContainerEl = document.getElementById("shopping-cart-container");
 const cartItemsEl = document.getElementById("cart-items");
 
 
 function openCart() {
-  cartContainerEl.style.display = "block";
-  closeIconEl.style.display = "block";
-  cartIconEl.style.display = "none";
+  document.getElementById("shopping-cart").style.width = "100%";
   document.body.style.overflow = "hidden";
-}
-function closeCart() {
-  cartContainerEl.style.display = "none";
-  closeIconEl.style.display = "none";
-  cartIconEl.style.display = "block";
-  document.body.style.overflow = "visible";
 
 }
+function closeCart() {
+  document.getElementById("shopping-cart").style.width = "0%";
+  document.body.style.overflow = "visible";
+}
+
+
+
+
 
 function createCartItem(image, title, description, price, id) {
   const cartItemTemplate = `
@@ -187,18 +189,12 @@ function createCartItem(image, title, description, price, id) {
   </div>
 </div>
   `;
-console.log(id);
+ console.log(getCartItems())
   addToCart(cartItemTemplate);
-
+ 
 }
 function addToCart(item) {
     cartItemsEl.innerHTML += item;
-  /*
-  cartItemsArray.push(item);
-  const cartItems = cartItemsArray.join("");
-
-  console.log(cartItemsArray);
-*/
 }
 function getCartItems() {
   const cartItems = Array.from(document.querySelectorAll('.item'));
@@ -216,3 +212,15 @@ function renderCartItems(cartItems) {
     cartItemsEl.innerHTML += item.outerHTML;
   });
 }
+
+
+//checkout button animation
+const container = document.querySelector('.checkout_container');
+container.addEventListener('click', () => {
+  container.classList.add('active');
+  // Remove the class after a short delay to allow the animation to complete
+  setTimeout(() => {
+    container.classList.remove('active');
+  }, 2500);
+
+});
