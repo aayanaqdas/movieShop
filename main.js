@@ -43,40 +43,42 @@ function createMovieCard(movie) {
       : release_date || "No release date";
   const year = formattedDate.slice(0, 4);
   const price = year >= 2023 ? "100" : year > 2000 ? "50" : "25";
-   const escapedOverview = overview.replace(/['"]/g, "&apos;");
+  const escapedOverview = overview.replace(/['"]/g, "&apos;");
   const description = escapedOverview.length > 136 ? escapedOverview.slice(0, 136) + "..." : escapedOverview;
- 
+
   const cardTemplate = `
 
-  <div class="card" data-id=${id}>
-  <a class="card-media" href="index.html">
-  <img src="${imagePath}" alt="${original_title}" width="100%" />
-  </a>
-  
+  <div class="card" data-id="${id}">
+  <div class="card-media">
+    <img
+      src="${imagePath}"
+      alt="${original_title}"
+      width="100%"
+    />
+  </div>
+
   <div class="card-content">
-       
-      <div class="card-header">
-          <div class="left-content">
+    <div class="card-header">
+      <div class="headerContent-wrapper">
+        <div class="title-wrapper">
           <h3 class="movieTitle">${truncatedTitle}</h3>
-          <div class="year_moreInfoBtn"> 
-            <span class="yearText">${formattedDate}</span>
-            <a href="" class="moreInfoBtn">More Info</a>
+          <div class="right-content">
+            <span class="yearText">${year}</span>
+              <a href="" class="moreInfoBtn">More Info</a>
+            </div>
           </div>
-          
-  
-          </div>
-      <div class="right-content">
-      
       </div>
+    </div>
+    <div class="price">
+      Price: ${price + "Kr"}
+      <button
+        id="buy-btn"
+        onclick="createCartItem(\`${imagePath}\`, \`${original_title}\`, \`${description}\`, \`${price}\`, \`${id}\`)"
+      >
+        Buy
+      </button>
+    </div>
   </div>
-  <div class="price">
-     Price:  ${price + " Kr"}
-     
-     <button id="buy-btn" onclick="createCartItem(\`${imagePath}\`, \`${original_title}\`, \`${description}\`, \`${price}\`, \`${id}\`)">Buy</button>
-     
-   
-  </div>
-</div>
 </div>
       
   `;
@@ -150,22 +152,22 @@ const cartIconEl = document.getElementById("cart-icon");
 const closeIconEl = document.getElementById("close-icon");
 const cartContainerEl = document.getElementById("shopping-cart-container");
 const cartItemsEl = document.getElementById("cart-items");
-
+const shoppingCartEl = document.getElementById("shopping-cart");
+const totalPriceEl = document.getElementById("cart-total-price") ;
 
 function openCart() {
-  document.getElementById("shopping-cart").style.width = "100%";
+  shoppingCartEl.style.width = "100%";
   document.body.style.overflow = "hidden";
-
+  calculatePrice();
 }
 function closeCart() {
-  document.getElementById("shopping-cart").style.width = "0%";
-  document.body.style.overflow = "visible";
+  shoppingCartEl.style.width = "0%";
+  setTimeout(() => {
+    document.body.style.overflow = "visible";
+  }, 500);
+    
+
 }
-
-
-
-
-
 function createCartItem(image, title, description, price, id) {
   const cartItemTemplate = `
   <div class="item" data-id= "${id}">
@@ -191,10 +193,11 @@ function createCartItem(image, title, description, price, id) {
   `;
  console.log(getCartItems())
   addToCart(cartItemTemplate);
- 
+  
 }
-function addToCart(item) {
-    cartItemsEl.innerHTML += item;
+function addToCart(item, price) {
+  cartItemsEl.innerHTML += item;
+  calculatePrice();
 }
 function getCartItems() {
   const cartItems = Array.from(document.querySelectorAll('.item'));
@@ -211,6 +214,18 @@ function renderCartItems(cartItems) {
   cartItems.forEach((item) => {
     cartItemsEl.innerHTML += item.outerHTML;
   });
+  calculatePrice();
+}
+
+
+function calculatePrice() {
+  const cartItems = document.querySelectorAll('.item');
+  let totalPrice = 0;
+  cartItems.forEach((item) => {
+    const price = item.querySelector('.item-price').innerText.replace(/\D/g, '') * 1; // Remove non-numeric characters and convert it to a number
+    totalPrice += price;
+  });
+  totalPriceEl.innerText = `${totalPrice},-`;
 }
 
 

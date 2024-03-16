@@ -194,7 +194,7 @@ hr {
   margin-top: 5px;
 }
 
-.cart-total-price {
+#cart-total-price {
   font-size: 25px;
   font-weight: 600;
   margin-top: 5px;
@@ -508,6 +508,7 @@ hr {
   margin-top: 20px;
 }
 
+
 .content-container .card {
   position: relative;
   font-size: 14px;
@@ -538,30 +539,37 @@ hr {
 
 .content-container .card .card-content .card-header {
   padding: 8px 0;
+  width: 100%;
   display: flex;
-  align-items: center;
-  justify-content: space-between;
+
 }
+
+.content-container .card:hover .right-content{
+  display: flex;
+  margin-top: 10px;
+  margin-bottom: -5px;
+}
+
 
 .content-container .card .card-content .card-header .movieTitle {
   font-weight: 600;
+
 }
 
-.content-container .card .card-content .card-header .year_moreInfoBtn {
-  display: flex;
-  justify-content: space-between;
-}
 .content-container .card .card-content .card-header .yearText {
   color: #12efec;
 }
 .content-container .card .card-content .moreInfoBtn {
+  font-size: 12px;
+  position: absolute;
+  right: 0;
+  margin-right: 7px;
   text-decoration: none;
   color: #fff;
   cursor: pointer;
   border: 1px solid rgba(255, 255, 255, 0.5);
   border-radius: 0.4rem;
   transition: all 0.5s ease;
-  margin-left: 28px;
   display: none;
 }
 
@@ -598,7 +606,7 @@ hr {
   border-color: #0091ea;
 }
 
-.content-container .card:hover .card-content .card-header .movieTitle {
+.content-container .card:hover .card-content .card-header {
   margin-bottom: 10px;
 }
 
