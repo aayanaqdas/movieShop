@@ -44,7 +44,10 @@ function createMovieCard(movie) {
   const year = formattedDate.slice(0, 4);
   const price = year >= 2023 ? "100" : year > 2000 ? "50" : "25";
   const escapedOverview = overview.replace(/['"]/g, "&apos;");
-  const description = escapedOverview.length > 136 ? escapedOverview.slice(0, 136) + "..." : escapedOverview;
+  const description =
+    escapedOverview.length > 136
+      ? escapedOverview.slice(0, 136) + "..."
+      : escapedOverview;
 
   const cardTemplate = `
 
@@ -146,18 +149,24 @@ async function init() {
 
 init();
 
-
 //Cart functions
 const cartIconEl = document.getElementById("cart-icon");
 const closeIconEl = document.getElementById("close-icon");
-const cartContainerEl = document.getElementById("shopping-cart-container");
-const cartItemsEl = document.getElementById("cart-items");
 const shoppingCartEl = document.getElementById("shopping-cart");
-const totalPriceEl = document.getElementById("cart-total-price") ;
+const cartEmptyText = document.getElementById("cart-empty-text");
 
+const cartItemsArray = [];
+
+const cartItemsEl = document.getElementById("cart-items");
+const cartBottomSection = document.getElementById("cart-bottom-section");
+const totalPriceEl = document.getElementById("cart-total-price");
+const cartTitle = document.querySelector(".cart-title");
+let cartItemsCount = 0;
+const cartIconLabelEL = document.getElementById("count-label");
 function openCart() {
   shoppingCartEl.style.width = "100%";
   document.body.style.overflow = "hidden";
+  checkCartIsEmpty();
   calculatePrice();
 }
 function closeCart() {
@@ -165,11 +174,27 @@ function closeCart() {
   setTimeout(() => {
     document.body.style.overflow = "visible";
   }, 500);
-    
+}
 
+function checkCartIsEmpty() {
+  if (cartItemsEl.innerHTML === "") {
+    cartEmptyText.innerHTML = "No items in cart";
+    cartBottomSection.style.display = "none";
+    document.querySelector("hr").style.display = "none";
+  } else if (cartItemsEl.innerHTML !== "") {
+    cartBottomSection.style.display = "block";
+    cartEmptyText.innerHTML = "";
+    document.querySelector("hr").style.display = "block";
+  }
 }
 function createCartItem(image, title, description, price, id) {
-  const cartItemTemplate = `
+  // Checking if an item with the same id is in the cart
+  const existingItem = getCartItems().find((item) => item.dataset.id === id);
+  if (existingItem) {
+    alert(`${title} is already in the cart`);
+  } else {
+    // If an item with the same ID doesn't exist, add it to the cart
+    const cartItemTemplate = `
   <div class="item" data-id= "${id}">
   <div class="item-content">
     <div class="item-img-text-wrapper">
@@ -191,51 +216,79 @@ function createCartItem(image, title, description, price, id) {
   </div>
 </div>
   `;
- console.log(getCartItems())
-  addToCart(cartItemTemplate);
-  
+
+    addToCart(cartItemTemplate);
+
+    if (cartItemsCount > 0) {
+      cartIconLabelEL.style.display = "inline-block";
+      cartIconLabelEL.innerHTML = cartItemsCount;
+    }
+  }
 }
-function addToCart(item, price) {
+function addToCart(item) {
   cartItemsEl.innerHTML += item;
+  cartItemsArray.push(item);
+  cartItemsCount = cartItemsArray.length;
+  cartTitle.innerHTML = `Your cart (${cartItemsCount} items)`;
+
   calculatePrice();
+  checkCartIsEmpty();
 }
+
 function getCartItems() {
-  const cartItems = Array.from(document.querySelectorAll('.item'));
+  const cartItems = Array.from(document.querySelectorAll(".item"));
   return cartItems;
 }
 
 function removeCartItem(itemId) {
-  const updatedCartItems = getCartItems().filter((item) => String(item.dataset.id) !== String(itemId));
+  const updatedCartItems = getCartItems().filter(
+    (item) => String(item.dataset.id) !== String(itemId)
+  );
+  cartItemsArray.pop(updatedCartItems);
+  cartItemsCount = cartItemsArray.length;
+  cartTitle.innerHTML = `Your cart (${cartItemsCount} items)`;
+  if (cartItemsCount > 0) {
+    cartIconLabelEL.innerHTML = cartItemsCount;
+  } else {
+    cartIconLabelEL.style.display = "none";
+  }
+
   renderCartItems(updatedCartItems);
+  checkCartIsEmpty();
 }
 
 function renderCartItems(cartItems) {
-  cartItemsEl.innerHTML = '';
+  cartItemsEl.innerHTML = "";
   cartItems.forEach((item) => {
     cartItemsEl.innerHTML += item.outerHTML;
   });
   calculatePrice();
 }
 
-
 function calculatePrice() {
-  const cartItems = document.querySelectorAll('.item');
+  const cartItems = document.querySelectorAll(".item");
   let totalPrice = 0;
   cartItems.forEach((item) => {
-    const price = item.querySelector('.item-price').innerText.replace(/\D/g, '') * 1; // Remove non-numeric characters and convert it to a number
+    const price =
+      item.querySelector(".item-price").innerText.replace(/\D/g, "") * 1; // Remove non-numeric characters and convert it to a number
     totalPrice += price;
   });
   totalPriceEl.innerText = `${totalPrice},-`;
 }
 
+const cardElements = document.querySelectorAll(".content-container .card");
+cardElements.forEach((card) => {
+  card.addEventListener("touchstart", () => {
+    card.classList.add("touchstart");
+  });
+});
 
 //checkout button animation
-const container = document.querySelector('.checkout_container');
-container.addEventListener('click', () => {
-  container.classList.add('active');
+const container = document.querySelector(".checkout_container");
+container.addEventListener("click", () => {
+  container.classList.add("active");
   // Remove the class after a short delay to allow the animation to complete
   setTimeout(() => {
-    container.classList.remove('active');
+    container.classList.remove("active");
   }, 2500);
-
 });
