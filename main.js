@@ -89,12 +89,7 @@ function createMovieCard(movie) {
   return cardTemplate;
 }
 
-const card = document.querySelector('.card');
-if(card){
-  card.addEventListener('click', () => {
-    card.classList.toggle('active');
-  });
-}
+
 
 // Clear result element for search
 function clearResults() {
@@ -162,7 +157,7 @@ const closeIconEl = document.getElementById("close-icon");
 const shoppingCartEl = document.getElementById("shopping-cart");
 const cartEmptyText = document.getElementById("cart-empty-text");
 
-const cartItemsArray = [];
+let cartItemsArray = [];
 
 const cartItemsEl = document.getElementById("cart-items");
 const cartBottomSection = document.getElementById("cart-bottom-section");
@@ -173,8 +168,8 @@ const cartIconLabelEL = document.getElementById("count-label");
 function openCart() {
   shoppingCartEl.style.width = "100%";
   document.body.style.overflow = "hidden";
-  checkCartIsEmpty();
   calculatePrice();
+  checkCartIsEmpty();  
 }
 function closeCart() {
   shoppingCartEl.style.width = "0%";
@@ -225,7 +220,7 @@ function createCartItem(image, title, description, price, id) {
   `;
 
     addToCart(cartItemTemplate);
-    
+    calculatePrice();
   }
 }
 function addToCart(item) {
@@ -252,18 +247,21 @@ function removeCartItem(itemId) {
   cartItemsCount = cartItemsArray.length;
   cartTitle.innerHTML = `Your cart (${cartItemsCount} items)`;
 
-  updateCartLabel();
+
   renderCartItems(updatedCartItems);
+  updateCartLabel();  
+  checkCartIsEmpty();   
   calculatePrice();
-  checkCartIsEmpty();
 }
 
-function renderCartItems(cartItems) {
+function renderCartItems(cartItems) { 
   cartItemsEl.innerHTML = "";
   cartItems.forEach((item) => {
     cartItemsEl.innerHTML += item.outerHTML;
   });
   calculatePrice();
+  checkCartIsEmpty();
+  updateCartLabel();
 }
 
 function calculatePrice() {
@@ -289,6 +287,16 @@ function updateCartLabel(){
 
 
 
+// Function to clear the cart
+function clearCart() {
+  cartItemsArray.length = 0;
+  cartItemsEl.innerHTML = "";
+  cartItemsCount = 0;
+  cartTitle.innerHTML = `Your cart (${cartItemsCount} items)`;
+  totalPriceEl.innerText = `0,-`;
+  checkCartIsEmpty();
+  updateCartLabel();
+}
 
 //checkout button animation
 const container = document.querySelector(".checkout_container");
@@ -297,5 +305,6 @@ container.addEventListener("click", () => {
   // Remove the class after a short delay to allow the animation to complete
   setTimeout(() => {
     container.classList.remove("active");
+    clearCart();
   }, 2500);
 });

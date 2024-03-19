@@ -106,7 +106,7 @@ body {
   color: black;
 }
 
-.cart-title {
+.cart-title-wrapper {
   color: black;
   font-size: 25px;
   font-weight: 600;
@@ -688,42 +688,48 @@ hr {
   transition: all 0.5s ease;
 }
 
-.content-container .card:hover,
-.content-container .card.active {
-  cursor: pointer;
-}
-.content-container .card:hover .card-content,
-.content-container .card.active .card-content {
+@supports not (-webkit-overflow-scrolling: touch) {
+  .content-container .card:hover {
+    cursor: pointer;
+  }
+.content-container .card:hover .card-content {
   background-image: linear-gradient(180deg, rgba(51, 55, 69, 0), #101528 48%);
 }
 
-.content-container .card:hover .card-content .card-header,
-.content-container .card.active .card-content .card-header {
+.content-container .card:hover .card-content .card-header {
   margin-bottom: 10px;
 }
-.content-container .card:hover .right-content,
-.content-container .card.active .right-content {
+
+.content-container .card:hover .right-content {
   display: flex;
   margin-top: 10px;
   margin-bottom: -5px;
 }
-
-.content-container .card:hover .moreInfoBtn,
-.content-container .card.active .moreInfoBtn {
+.content-container .card:hover .moreInfoBtn {
   display: block;
 }
-.content-container .card:hover #buy-btn,
-.content-container .card.active #buy-btn {
+.content-container .card:hover #buy-btn {
   background-color: #0091ea;
   border-color: #0091ea;
 }
 
-.content-container .card:hover .price,
-.content-container .card.active .price {
+.content-container .card:hover .price{
   max-height: 200px;
   opacity: 1;
   padding: 8px 0;
 }
+}
+
+
+
+
+
+
+
+
+
+
+
 
 @media (max-width: 1000px) {
   #result {
