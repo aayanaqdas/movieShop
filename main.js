@@ -89,6 +89,13 @@ function createMovieCard(movie) {
   return cardTemplate;
 }
 
+const card = document.querySelector('.card');
+if(card){
+  card.addEventListener('click', () => {
+    card.classList.toggle('active');
+  });
+}
+
 // Clear result element for search
 function clearResults() {
   result.innerHTML = "";
@@ -218,11 +225,7 @@ function createCartItem(image, title, description, price, id) {
   `;
 
     addToCart(cartItemTemplate);
-
-    if (cartItemsCount > 0) {
-      cartIconLabelEL.style.display = "inline-block";
-      cartIconLabelEL.innerHTML = cartItemsCount;
-    }
+    
   }
 }
 function addToCart(item) {
@@ -230,13 +233,14 @@ function addToCart(item) {
   cartItemsArray.push(item);
   cartItemsCount = cartItemsArray.length;
   cartTitle.innerHTML = `Your cart (${cartItemsCount} items)`;
-
+  updateCartLabel();
   calculatePrice();
   checkCartIsEmpty();
 }
 
 function getCartItems() {
   const cartItems = Array.from(document.querySelectorAll(".item"));
+  calculatePrice();
   return cartItems;
 }
 
@@ -247,13 +251,10 @@ function removeCartItem(itemId) {
   cartItemsArray.pop(updatedCartItems);
   cartItemsCount = cartItemsArray.length;
   cartTitle.innerHTML = `Your cart (${cartItemsCount} items)`;
-  if (cartItemsCount > 0) {
-    cartIconLabelEL.innerHTML = cartItemsCount;
-  } else {
-    cartIconLabelEL.style.display = "none";
-  }
 
+  updateCartLabel();
   renderCartItems(updatedCartItems);
+  calculatePrice();
   checkCartIsEmpty();
 }
 
@@ -276,12 +277,18 @@ function calculatePrice() {
   totalPriceEl.innerText = `${totalPrice},-`;
 }
 
-const cardElements = document.querySelectorAll(".content-container .card");
-cardElements.forEach((card) => {
-  card.addEventListener("touchstart", () => {
-    card.classList.add("touchstart");
-  });
-});
+function updateCartLabel(){
+  if (cartItemsCount > 0) {
+    cartIconLabelEL.style.display = "inline-block";
+    cartIconLabelEL.innerHTML = cartItemsCount;
+  }
+  else{
+    cartIconLabelEL.style.display = "none";
+  }
+}
+
+
+
 
 //checkout button animation
 const container = document.querySelector(".checkout_container");

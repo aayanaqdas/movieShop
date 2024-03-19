@@ -10,7 +10,7 @@
 
 body {
   color: #fff;
-  background-color: #212121;
+  background-color: #1e1e2e;
   padding: 1.5rem;
   margin: 0;
   padding: 0;
@@ -59,7 +59,7 @@ body {
   line-height: 20px;
   text-align: center;
   border-radius: 50%;
-  background-color: #0091ea;
+  background-color: #8282ff;
   color: #fff;
   font-size: 14px;
   font-weight: bold;
@@ -486,6 +486,67 @@ hr {
   display: flex;
   justify-content: center;
 }
+#search-form {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  width: 100%;
+}
+
+.search__input {
+  font-family: inherit;
+  font-size: inherit;
+  background-color: #f4f2f2;
+  border: none;
+  color: #1e1e2e;
+  padding: 0.7rem 1rem;
+  border-radius: 30px;
+  width: 80%;
+  max-width: 600px;
+  transition: all ease-in-out 0.5s;
+  margin-right: -2rem;
+}
+
+.search__input:hover,
+.search__input:focus {
+  box-shadow: 0em 5px 2em #606060;
+}
+
+
+
+.search__input::-webkit-input-placeholder {
+  font-weight: 100;
+  color: #ccc;
+}
+
+.search__input:focus + .search__button {
+  background-color: #f0eeee;
+}
+
+.search__button {
+  border: none;
+  border-radius: 30px;
+  background-color: #f4f2f2;
+  margin-top: 0.1em;
+}
+
+.search__button:hover {
+  cursor: pointer;
+}
+
+.search__icon {
+  height: 1.3em;
+  width: 1.3em;
+  font-size: 20px;
+  fill: #1e1e2e;
+}
+/*
+.searchBar {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
 
 #search-form {
   display: flex;
@@ -493,11 +554,11 @@ hr {
   width: 100%;
 }
 .search-input {
-  width: 80%;
-  max-width: 500px;
-  height: 30px;
+  width: 100%;
+  max-width: 600px;
+  height: 50px;
   padding: 17px;
-  border-radius: 12px;
+  border-radius: 100px;
   border: none;
   outline: none;
   box-shadow: 0px 0px 20px -18px lightgrey;
@@ -514,8 +575,22 @@ hr {
 
 .search-btn {
   cursor: pointer;
+  height: 50px;
+  width: 50px;
+  border: none;
+  border-radius: 50%;
+  position: absolute;
+  background-color: #1e1e2e;
+  right: 0;
+  transform: translateX(-149%);
+
 }
 
+.search-icon {
+  font-size: 30px;
+  color: white;
+}
+*/
 /*container for the content loaded from api*/
 .content-container {
   width: 100%;
@@ -614,36 +689,37 @@ hr {
 }
 
 .content-container .card:hover,
-.content-container .card.touchstart {
+.content-container .card.active {
   cursor: pointer;
 }
 .content-container .card:hover .card-content,
-.content-container .card.touchstart .card-content {
+.content-container .card.active .card-content {
   background-image: linear-gradient(180deg, rgba(51, 55, 69, 0), #101528 48%);
 }
 
-.content-container .card:hover .card-content .card-header {
+.content-container .card:hover .card-content .card-header,
+.content-container .card.active .card-content .card-header {
   margin-bottom: 10px;
 }
 .content-container .card:hover .right-content,
-.content-container .card.touchstart .right-content {
+.content-container .card.active .right-content {
   display: flex;
   margin-top: 10px;
   margin-bottom: -5px;
 }
 
 .content-container .card:hover .moreInfoBtn,
-.content-container .card.touchstart .moreInfoBtn {
+.content-container .card.active .moreInfoBtn {
   display: block;
 }
 .content-container .card:hover #buy-btn,
-.content-container .card.touchstart #buy-btn {
+.content-container .card.active #buy-btn {
   background-color: #0091ea;
   border-color: #0091ea;
 }
 
 .content-container .card:hover .price,
-.content-container .card.touchstart .price {
+.content-container .card.active .price {
   max-height: 200px;
   opacity: 1;
   padding: 8px 0;
