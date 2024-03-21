@@ -2,7 +2,7 @@ const apiKey = "37d7e055234a0531d45416a1d56745eb";
 const imgApi = "https://image.tmdb.org/t/p/w1280";
 const searchUrl = `https://api.themoviedb.org/3/search/movie?api_key=${apiKey}&query=`;
 const form = document.getElementById("search-form");
-const query = document.getElementById("search-input");
+const query = document.querySelector(".search-input");
 const result = document.getElementById("result");
 
 let page = 1;
@@ -67,7 +67,7 @@ function createMovieCard(movie) {
           <h3 class="movieTitle">${truncatedTitle}</h3>
           <div class="right-content">
             <span class="yearText">${year}</span>
-              <a href="" class="moreInfoBtn">More Info</a>
+              <a href="movieInfo.html" class="moreInfoBtn">More Info</a>
             </div>
           </div>
       </div>
@@ -176,13 +176,19 @@ function closeCart() {
   setTimeout(() => {
     document.body.style.overflow = "visible";
   }, 500);
+  calculatePrice();
 }
+
+shoppingCartEl.addEventListener("transitionend", () => {
+  calculatePrice();
+});
 
 function checkCartIsEmpty() {
   if (cartItemsEl.innerHTML === "") {
     cartEmptyText.innerHTML = "No items in cart";
     cartBottomSection.style.display = "none";
     document.querySelector("hr").style.display = "none";
+
   } else if (cartItemsEl.innerHTML !== "") {
     cartBottomSection.style.display = "block";
     cartEmptyText.innerHTML = "";
@@ -268,11 +274,11 @@ function calculatePrice() {
   const cartItems = document.querySelectorAll(".item");
   let totalPrice = 0;
   cartItems.forEach((item) => {
-    const price =
-      item.querySelector(".item-price").innerText.replace(/\D/g, "") * 1; // Remove non-numeric characters and convert it to a number
-    totalPrice += price;
+    const priceString = item.querySelector(".item-price").innerText;
+    const priceNumber = Number(priceString.replace(/\D/g, ""));
+    totalPrice += priceNumber;
+    totalPriceEl.innerText = `${totalPrice},-`;
   });
-  totalPriceEl.innerText = `${totalPrice},-`;
 }
 
 function updateCartLabel(){
@@ -308,3 +314,4 @@ container.addEventListener("click", () => {
     clearCart();
   }, 2500);
 });
+

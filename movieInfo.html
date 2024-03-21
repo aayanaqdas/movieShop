@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <script
+      src="https://kit.fontawesome.com/c385798621.js"
+      crossorigin="anonymous"
+    ></script>
+    <link rel="stylesheet" href="style.css" />
+    <title>MovieShop</title>
+  </head>
+  <body>
+    <div class="container">
+      <div class="header">
+        <div class="nav">
+          <div class="nav-siteName">
+            <a href="index.html">
+              <h1>MovieShop</h1>
+            </a>
+          </div>
+          <span id="cart-icon" onclick="openCart()">
+            <i class="fa-solid fa-cart-shopping"></i>
+            <div id="count-label"></div>
+          </span>
+          <div class="shopping-cart-container">
+            <div id="shopping-cart">
+              <div class="cart-top-section">
+                <div class="cart-title-wrapper">
+                  <h3 class="cart-title">Your cart (0 items)</h3>
+                </div>
+                <span id="close-icon" onclick="closeCart()">
+                  <i class="fa-solid fa-xmark"></i>
+                </span>
+              </div>
+              <div class="shopping-cart-content">
+                <div id="cart-empty-text"></div>
+                <div id="cart-items"></div>
+                <hr />
+                <div id="cart-bottom-section">
+                  <div class="cart-total">
+                    <div class="cart-total-title">
+                      <h4>Total NOK:</h4>
+                    </div>
+                    <div id="cart-total-price">0,00</div>
+                  </div>
+                  <div class="checkout_container">
+                    <div class="checkout_left-side">
+                      <div class="checkout-card">
+                        <div class="checkout_card-line"></div>
+                        <div class="checkout_buttons"></div>
+                      </div>
+                      <div class="post">
+                        <div class="post-line"></div>
+                        <div class="screen">
+                          <div class="dollar">$</div>
+                        </div>
+                        <div class="numbers"></div>
+                        <div class="numbers-line2"></div>
+                      </div>
+                    </div>
+                    <div class="checkout_right-side">
+                      <div class="new">Checkout</div>
+                      <svg
+                        viewBox="0 0 451.846 451.847"
+                        height="512"
+                        width="512"
+                        xmlns="http://www.w3.org/2000/svg"
+                        class="arrow"
+                      >
+                        <path
+                          fill="#000000"
+                          data-old_color="#000000"
+                          class="active-path"
+                          data-original="#000000"
+                          d="M345.441 248.292L151.154 442.573c-12.359 12.365-32.397 12.365-44.75 0-12.354-12.354-12.354-32.391 0-44.744L278.318 225.92 106.409 54.017c-12.354-12.359-12.354-32.394 0-44.748 12.354-12.359 32.391-12.359 44.75 0l194.287 194.284c6.177 6.18 9.262 14.271 9.262 22.366 0 8.099-3.091 16.196-9.267 22.373z"
+                        ></path>
+                      </svg>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="content">
+        <div class="search-bar">
+          <form id="search-form">
+            <div class="input_btn">
+            <input
+              type="text"
+              class="search-input"
+              id="search-input"
+              placeholder="Search Movies ..."
+            />  
+            <button class="search-btn" type="submit" >
+              <i class="fa-solid fa-arrow-right"></i>
+            </button>                          
+            </div>
+          </form>
+        </div>
+
+        <div class="movie-info-container">
+            
+        </div>
+      </div>
+    </div>
+
+    <script src="main.js"></script>
+  </body>
+</html>
